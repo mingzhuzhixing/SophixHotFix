@@ -61,6 +61,7 @@ public class SophixStubApplication extends SophixApplication {
                 .setPatchLoadStatusStub(new PatchLoadStatusListener() {
                     @Override
                     public void onLoad(final int mode, final int code, final String info, final int handlePatchVersion) {
+                        Log.w(TAG, "sophix load mode:" + mode + " code:" + code + " info:" + info + " handlePatchVersion:" + handlePatchVersion);
                         if (code == PatchStatus.CODE_LOAD_SUCCESS) {
                             Log.i(TAG, "sophix load patch success!");
                         } else if (code == PatchStatus.CODE_LOAD_RELAUNCH) {
@@ -69,5 +70,12 @@ public class SophixStubApplication extends SophixApplication {
                         }
                     }
                 }).initialize();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        //该方法主要用于查询服务器是否有新的可用补丁。SDK内部限制连续两次queryAndLoadNewPatch()方法调用不能短于3s，否则的话就会报code:19的错误码。
+        SophixManager.getInstance().queryAndLoadNewPatch();
     }
 }

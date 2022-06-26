@@ -27,7 +27,7 @@
 
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"
-            android:value="333729441" />
+            android:value="333729441-1" />
         <meta-data
             android:name="com.taobao.android.hotfix.APPSECRET"
             android:value="3f71c1ecfb404e0ca91b82b9af51a386" />
